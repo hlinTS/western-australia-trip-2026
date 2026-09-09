@@ -1,0 +1,9 @@
+*.private.html
+*private*
+*.qr.png
+*.qr.jpg
+*.qrcode.png
+*.qrcode.jpg
+.DS_Store
+work/
+outputs/
