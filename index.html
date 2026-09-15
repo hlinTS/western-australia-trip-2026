@@ -270,6 +270,7 @@ kbd{font-family:inherit;background:var(--chip);border:1px solid var(--line);bord
 @media(max-width:560px){.todo-date{min-width:58px}.route-map-card svg{min-height:150px}}
 
 
+.supply-shell{overflow:hidden;margin-top:10px}.supply-shell>summary{list-style:none;cursor:pointer;padding:15px 16px;display:flex;justify-content:space-between;align-items:center;font-weight:800}.supply-shell>summary::-webkit-details-marker{display:none}.supply-shell>summary:after{content:"＋";color:var(--muted)}.supply-shell[open]>summary:after{content:"－"}.supply-body{padding:0 14px 14px;border-top:1px solid var(--line)}.supply-row{padding:11px 0;border-bottom:1px solid var(--line)}.supply-row:last-child{border-bottom:0}.supply-row b{display:block}.supply-row span{display:block;color:var(--muted);font-size:12px}.supply-row .actions{margin-top:7px}
 .packing-shell{overflow:hidden}.packing-shell>summary{list-style:none;cursor:pointer;padding:15px 16px;display:flex;justify-content:space-between;align-items:center;font-weight:800}.packing-shell>summary::-webkit-details-marker{display:none}.packing-shell>summary:after{content:"＋";margin-left:10px;color:var(--muted)}.packing-shell[open]>summary:after{content:"－"}.packing-progress{margin-left:auto;font-size:12px;color:var(--muted);font-weight:600}.packing-body{padding:0 14px 14px;border-top:1px solid var(--line)}.packing-chips{display:flex;gap:7px;overflow-x:auto;padding:12px 0 8px;scrollbar-width:none}.packing-chips::-webkit-scrollbar{display:none}.pack-chip{white-space:nowrap;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 10px;font-size:12px;color:var(--muted);cursor:pointer}.pack-chip.active{font-weight:800;color:var(--text);box-shadow:var(--shadow)}#packingList .wallet-cat{box-shadow:none;margin:0}#packingList .wallet-cat:not([open]){display:none}
 </style>
 </head>
@@ -294,6 +295,7 @@ kbd{font-family:inherit;background:var(--chip);border:1px solid var(--line);bord
 <a href="#days">逐日行程</a>
 <a href="#todo">待办</a>
 <a href="#packing">行李</a>
+<a href="#supply">补给</a>
 <a href="#tips">贴士</a>
 </nav>
 <section id="focus">
@@ -541,7 +543,7 @@ kbd{font-family:inherit;background:var(--chip);border:1px solid var(--line);bord
 <div class="detail-line"><div class="k">区域</div><div>Extended Area：Exmouth / Kalgoorlie / Esperance</div></div>
 <div class="detail-line"><div class="k">地址</div><div>160 Adelaide Terrace, Perth WA 6000</div></div>
 <div class="detail-line"><div class="k">电话</div><div><a href="tel:+61893251000">+61 8 9325 1000</a></div></div>
-<div class="detail-note"><b>10/8 提前还车：</b> 已询问 No Birds，关注回复。</div>
+<div class="detail-note"><b>10/8 还车：</b>Fremantle 异店还车可选，relocation fee AUD 75；可在取车时或租期内再决定。若仍还 Perth City，已确认可 after-hours return，计费至次一营业日 07:00。</div>
 <div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=No+Birds+Car+Rental+160+Adelaide+Terrace+Perth+WA+6000" rel="noopener" target="_blank">📍 导航</a><a class="btn" href="tel:+61893251000">☎️ 电话</a></div>
 </div>
 </details><details class="wallet-item order-track" data-end="2026-10-09T18:00:00+08:00" data-name="Rottnest Express" data-start="2026-10-09T09:30:00+08:00" id="order-rotto">
@@ -594,10 +596,16 @@ kbd{font-family:inherit;background:var(--chip);border:1px solid var(--line);bord
 <div class="card todo" id="todoList"></div><div class="actions" style="margin-top:10px"><button class="btn primary" id="addTodo" type="button">＋ 添加待办</button></div>
 </section>
 <section id="packing"><div class="section-title"><h2>行李清单</h2><small>可编辑 · 仅保存在当前浏览器</small></div><details class="card packing-shell" id="packingShell"><summary class="packing-summary"><span>🧳 行李清单</span><span class="packing-progress" id="packingProgress">读取中…</span></summary><div class="packing-body"><div class="packing-chips" id="packingChips"></div><div id="packingList"></div><div class="actions" style="margin-top:12px"><button class="btn primary" id="addPacking" type="button">＋ 添加物品</button></div></div></details></section>
+<section id="supply"><div class="section-title"><h2>沿途补给</h2><small>需要时再展开 · 超市 / 临时采购</small></div><details class="card supply-shell"><summary><span>🛒 北线补给点</span><span class="packing-progress">按路线整理</span></summary><div class="supply-body">
+<div class="supply-row"><b>Jurien Bay｜Jurien IGA</b><span>第一晚补水、零食、早餐等；营业时间以当天门店信息为准。</span><div class="actions"><a class="btn small" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Jurien+IGA+WA">📍 导航</a></div></div>
+<div class="supply-row"><b>Geraldton｜Coles Geraldton · 建议大补给</b><span>Chapman Rd & View St；周一至周五 08:00–21:00，周六 08:00–17:00，周日 11:00–17:00。进入 Kalbarri / Shark Bay 前适合集中采购。</span><div class="actions"><a class="btn small" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Coles+Geraldton+Chapman+Rd+View+St">📍 导航</a></div></div>
+<div class="supply-row"><b>Kalbarri｜IGA Kalbarri</b><span>47–49 Grey St；每日 07:00–18:00，适合临时补货。</span><div class="actions"><a class="btn small" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=IGA+Kalbarri+47-49+Grey+Street">📍 导航</a></div></div>
+<div class="supply-row"><b>Denham｜IGA Local Grocer</b><span>97 Knight Terrace；每日 07:00–19:00，Shark Bay / Monkey Mia 阶段的主要补货点。</span><div class="actions"><a class="btn small" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=IGA+Local+Grocer+Denham+97+Knight+Terrace">📍 导航</a></div></div>
+</div></details></section>
 <section id="tips">
 <div class="section-title"><h2>实用贴士</h2><small>旅行中真正会用到的</small></div>
 <div class="tips">
-<div class="card tip"><h3>🚗 10/8 提前还车</h3><p>优先营业时间内当面交车；若晚于 17:30，按 No Birds after-hours 流程停车、锁车、投钥匙。拍摄车身四周、油表/里程、停车位置、锁车状态及 key-drop 过程。原订单还车时间仍为 10/9 11:00，留有次日营业时间缓冲。</p></div>
+<div class="card tip"><h3>🚗 10/8 还车</h3><p>优先考虑 Fremantle 异店还车（+$75，可租期内决定），可直接结束当天驾驶。若仍还 Perth City，已确认可 after-hours return；取车时确认停车位置与 Key Drop。</p></div>
 <div class="card tip"><h3>⛽ 北线加油</h3><p>长途段不要等油量很低才找油站。Geraldton 是重要补给点；Monkey Mia / Shark Bay、Kalbarri 一带价格和营业时间都可能更不友好。</p></div>
 <div class="card tip"><h3>🌇 尽量避免夜间北线驾驶</h3><p>西澳乡间道路日落后野生动物风险明显上升。10/8 不要为了赶 17:30 还车而压缩安全余量，晚到就使用 after-hours return。</p></div>
 <div class="card tip"><h3>🐋 观鲸当天</h3><p>10/10 09:00 开船，但把 08:30 当作真正的抵达时间。船程约2小时；海况变化大，出发前一天再看运营方通知。若容易晕船，早餐清淡并提前做好防晕准备。</p></div>
@@ -639,6 +647,7 @@ const events = [
   {t:'2026-10-02T10:30:00+08:00', title:'No Birds Perth City 取车', meta:'珀斯时间 UTC+8'},
   {t:'2026-10-09T10:00:00+08:00', title:'Rottnest Express 去程', meta:'Fremantle B Shed · 珀斯时间 UTC+8'},
   {t:'2026-10-09T17:30:00+08:00', title:'Rottnest Express 回程', meta:'Rottnest Island · 珀斯时间 UTC+8'},
+  {t:'2026-10-09T19:15:00+08:00', title:'Gibney 晚餐', meta:'Cottesloe · 2人 · Dining Room'},
   {t:'2026-10-10T08:30:00+08:00', title:'WWWA 观鲸码头集合', meta:'Sardine Jetty · 珀斯时间 UTC+8'},
   {t:'2026-10-10T09:00:00+08:00', title:'WWWA Whale Watch Perth 开船', meta:'约2小时 · 珀斯时间 UTC+8'},
   {t:'2026-10-11T00:25:00+08:00', title:'VN790 珀斯 → 胡志明', meta:'珀斯时间 UTC+8'},
@@ -706,13 +715,15 @@ const days = [
 {
  date:'10/02', dow:'周五', city:'Perth → Lancelin → Jurien Bay',
  summary:'北线自驾 Day 1 · 约270 km / 3h+',
- route:['Metro Hotel Perth City','No Birds Car Rental, 160 Adelaide Terrace Perth','Lancelin Sand Dunes','The Pinnacles Desert','Jurien Bay Motel Apartments'],
+ route:['Metro Hotel Perth City','No Birds Car Rental, 160 Adelaide Terrace Perth','Corica Pastries Northbridge','Parkside Coffee Perth','Lancelin Sand Dunes Carpark Beacon Road','Pinnacles Desert Discovery Centre','Jurien Bay Motel Apartments'],
  events:[
   ['05:33 / 18:37','日出 / 日落参考','当天北线尽量在天黑前完成主要驾驶。'],
   ['10:00','Metro Hotel 退房','退房后前往 No Birds。'],
-  ['10:30','No Birds Perth City 取车','检查车况并拍摄全车视频；带驾照/翻译材料、护照、实体信用卡。'],
-  ['中午','Lancelin Sand Dunes','沙丘后可考虑 Endeavour Tavern 一带海边午餐。'],
-  ['15:00后','The Pinnacles / 尖峰石阵','你原计划就是偏下午/傍晚到，光线更好；天黑后若不累可短暂观星。'],
+  ['10:30','No Birds Perth City 取车','检查车况并拍摄全车视频；带中国驾照原件、NAATI 翻译件、护照、实体信用卡。取车时确认 after-hours 停车位置 / Key Drop。'],
+  ['取车后','Corica Pastries · 买苹果派','106 Aberdeen St；优先 Lake St 店旁 5-minute bays，满位再用 Aberdeen St 周边收费停车。'],
+  ['随后','Parkside Coffee · 喝咖啡','短暂停留后正式北上；现场按停车标识找合法短停位。'],
+  ['中午','Lancelin Sand Dunes','导航 Beacon Rd 沙丘入口 / 停车区；租车停硬地，不驶入沙地。沙丘后可考虑海边午餐。'],
+  ['15:00后','The Pinnacles / 尖峰石阵','导航 Pinnacles Desert Discovery Centre / 主停车区；园内单向 Scenic Drive 沿途有停车湾。偏下午/傍晚光线更好。'],
   ['下午到店前','确认 Jurien Bay 自助入住邮件','查看密码 / 取钥匙说明；若仍未收到，联系酒店 +61 8 9652 2062。'],
   ['晚间','入住 Jurien Bay Motel Apartments','7 Murray St, Jurien Bay；如晚于前台时间，按邮件说明自助取钥匙。']
  ]
@@ -720,12 +731,12 @@ const days = [
 {
  date:'10/03', dow:'周六', city:'Jurien Bay → Lesueur → Hutt Lagoon → Kalbarri',
  summary:'北线自驾 Day 2 · 约405 km / 约5h纯驾驶',
- route:['Jurien Bay Motel Apartments','Lesueur National Park','Hutt Lagoon Pink Lake','Geraldton WA','Kalbarri Palm Resort'],
+ route:['Jurien Bay Motel Apartments','Lesueur Scenic Drive Entry Cockleshell Gully Road','Hutt Lagoon Pink Lake Lookout Port Gregory','Coles Geraldton Chapman Road View Street','Kalbarri Palm Resort'],
  events:[
   ['08:00左右','Jurien Bay → Lesueur National Park','走铺装 Lesueur Scenic Drive，约1.5小时；不安排长徒步。若当天进度落后，优先跳过 Lesueur。'],
   ['约10:00','离开 Lesueur → Hutt Lagoon','继续北上；Lesueur 是机动项，不为了它压缩粉湖时间。'],
   ['中午前后','Hutt Lagoon 粉湖','尽量利用较高太阳角度看湖色；最终以当天云量、风和实际湖色为准。'],
-  ['途中','Geraldton 补给 / 加油','作为主要补给节点，也顺便买水和零食。'],
+  ['途中','🛒 Geraldton 大补给 / 加油','建议在 Coles Geraldton 一次补足水、零食和后续几天常用物资，再继续北上。'],
   ['傍晚前','抵达 Kalbarri','尽量避免日落后继续赶北线；最晚不要拖到很晚才入住。'],
   ['晚间','入住 Kalbarri Palm Resort','8 Porter Street。']
  ]
@@ -733,7 +744,7 @@ const days = [
 {
  date:'10/04', dow:'周日', city:'Kalbarri',
  summary:'Kalbarri National Park 全天',
- route:['Kalbarri Palm Resort','Kalbarri Skywalk','Nature’s Window','Z Bend Lookout','Kalbarri Palm Resort'],
+ route:['Kalbarri Palm Resort','Kalbarri Skywalk Car Park','The Loop and Nature’s Window Car Park','Z Bend Lookout Car Park','Kalbarri Palm Resort'],
  events:[
   ['05:27 / 18:46','日出 / 日落参考','国家公园日，早晚光线更舒服。'],
   ['上午','Kalbarri National Park','Skywalk / Nature’s Window 等按体力与天气安排。'],
@@ -744,10 +755,12 @@ const days = [
 {
  date:'10/05', dow:'周一', city:'Kalbarri → Monkey Mia',
  summary:'北线自驾 Day 4 · 约390 km / 4.5h',
- route:['Kalbarri Palm Resort','Hamelin Pool WA','Shell Beach WA','Eagle Bluff WA','RAC Monkey Mia Dolphin Resort'],
+ route:['Kalbarri Palm Resort','Hamelin Pool Telegraph Station','Shell Beach Car Park Shark Bay','Eagle Bluff Lookout Car Park','RAC Monkey Mia Dolphin Resort'],
  events:[
   ['上午','Kalbarri 出发 → Shark Bay','原本的“抓龙虾”项目因太早已取消；长途日，出发前加油。'],
-  ['途中','小镇补给 + Shark Bay 顺路景点','可以买水和零食；Hamelin Pool / Shell Beach / Eagle Bluff 按时间择优。'],
+  ['途中','Shark Bay 顺路景点','Hamelin Pool / Shell Beach / Eagle Bluff 按时间择优；导航均以正式停车区 / 入口为目标。'],
+  ['可选停留','🦈 Ocean Park Aquarium','路过时视时间与兴趣决定是否参观；不作为硬任务。'],
+  ['可选停留','☕ Denham 小镇','可酌情用餐、购物、补给或海边闲逛；不设固定时间。'],
   ['下午','抵达 Monkey Mia','先入住；到度假村后再看当天有哪些可报名活动。'],
   ['晚间','RAC Monkey Mia Dolphin Resort','海滩房；适合散步、观星。']
  ]
@@ -755,10 +768,11 @@ const days = [
 {
  date:'10/06', dow:'周二', city:'Monkey Mia / Shark Bay',
  summary:'度假村与鲨鱼湾全天',
- route:['RAC Monkey Mia Dolphin Resort','Denham WA','Little Lagoon WA','RAC Monkey Mia Dolphin Resort'],
+ route:['RAC Monkey Mia Dolphin Resort','Little Lagoon WA','RAC Monkey Mia Dolphin Resort'],
  events:[
   ['05:24 / 18:49','日出 / 日落参考','完整度假日。'],
-  ['全天','Monkey Mia / Shark Bay 自由安排','这一天不做长途驾驶，留给海边、Denham、Little Lagoon 或度假村活动。'],
+  ['清晨','🐬 Monkey Mia 海豚 · 首选日','10/6、10/7 两个早晨都有机会；建议今天优先参加，按度假村当天官方安排到场。'],
+  ['全天','Monkey Mia / Shark Bay 自由安排','这一天不做长途驾驶，留给海边、Little Lagoon 或度假村活动。'],
   ['夜间','观星','远离强光后再看银河；具体云量临近当天再判断。']
  ]
 },
@@ -767,22 +781,23 @@ const days = [
  summary:'看海豚后南返 · 约390 km / 4.5h',
  route:['RAC Monkey Mia Dolphin Resort','Geraldton WA','The Gerald Apartment Hotel'],
  events:[
-  ['清晨','Monkey Mia 海豚体验','按度假村当天官方时间到场。'],
+  ['清晨','🐬 Monkey Mia 海豚 · 第二次机会','如10/6未参加、体验不理想或想再看一次，今天可再去；否则可直接按返程节奏安排。'],
   ['10:00前','退房并开始南返 Geraldton','预留加油和休息。'],
-  ['途中/晚餐','龙虾餐可作为备选','你原备注“吃顿龙虾？”；不设为硬任务，看当天路线和餐厅营业。'],
   ['傍晚','抵达 Geraldton','入住后吃晚餐、休息。'],
   ['晚间','The Gerald Apartment Hotel','25 Cathedral Ave。']
  ]
 },
 {
- date:'10/08', dow:'周四', city:'Geraldton → Perth → Fremantle',
+ date:'10/08', dow:'周四', city:'Geraldton → Fremantle / Perth',
  summary:'北线自驾 Day 7 · 约420 km / 5h',
- route:['The Gerald Apartment Hotel','No Birds Car Rental, 160 Adelaide Terrace Perth','Warders Hotel by Garde Fremantle'],
+ route:['The Gerald Apartment Hotel','No Birds Car Hire Fremantle','Warders Hotel by Garde Fremantle'],
  events:[
-  ['上午','Geraldton 出发回 Perth','不要为了17:30还车赶路。'],
-  ['抵珀后','No Birds 提前还车','优先人工归还；已提交询问，关注 No Birds 对人工截止时间及 after-hours 流程的回复。'],
-  ['还车时','完整留证','车身四周、油表/里程、停车位置、锁车状态、钥匙投入过程。'],
-  ['晚间','还车后直接前往 Fremantle','入住 Warders Hotel；避免10/9再折返 Perth 还车。']
+  ['上午','Geraldton 出发南返','不为还车赶路，安全优先。'],
+  ['可选停留','🦞 龙虾工厂','返程途中视时间决定是否停留，可参观 / 吃龙虾；不作为必须项目。'],
+  ['还车方案','Fremantle 异店还车优先','No Birds 已确认可 Fremantle 还车，relocation fee AUD 75；可在取车时或租期内决定。'],
+  ['备选','仍还 Perth City','如不选异店还车，可 Perth City 归还；若门店已关可 after-hours，计费至次一营业日 07:00。'],
+  ['还车时','完整留证','车身四周、油表/里程及交车状态；若 after-hours 再拍停车位置、锁车状态和 key-drop。'],
+  ['晚间','入住 Warders Hotel','若 Fremantle 异店还车，直接结束驾驶；若 Perth City 还车，可 Uber 带行李前往 Fremantle。']
  ]
 },
 {
@@ -797,7 +812,8 @@ const days = [
   ['10:45–15:45','E-bike 环岛（主方案）','南岸海湾 → Little Salmon Bay → Wadjemup Lighthouse → West End → 北岸 → The Basin → Settlement；根据风况和体力机动取舍。'],
   ['备选方案','Island Explorer 巴士环岛','如临近天气不适合骑行，可取消 E-bike 后改乘 Island Explorer。巴士为备选，不删除相关地图/站点参考。'],
   ['约16:00','Pedal & Flipper 还车','不要把还车卡到最后；还车后在 Settlement 活动。'],
-  ['17:30','Rottnest → Fremantle','返程后步行回酒店。']
+  ['17:30','Rottnest → Fremantle','返程抵达后前往 Cottesloe。'],
+  ['19:15','🍽️ Gibney · 已预订','2人 · Dining Room · 40 Marine Parade, Cottesloe；预订时段 19:15–21:30，Smart dress。']
  ]
 },
 {
@@ -839,26 +855,30 @@ const GEO={
   'Perth Airport T1':[-31.9401,115.9670],
   'Metro Hotel Perth City':[-31.9580,115.8745],
   'No Birds Car Rental, 160 Adelaide Terrace Perth':[-31.9587,115.8718],
-  'Lancelin Sand Dunes':[-30.9975,115.3316],
-  'The Pinnacles Desert':[-30.6036,115.1600],
+  'Lancelin Sand Dunes Carpark Beacon Road':[-30.9975,115.3316],
+  'Corica Pastries Northbridge':[-31.9467,115.8546],
+  'Parkside Coffee Perth':[-31.9479,115.8640],
+  'Pinnacles Desert Discovery Centre':[-30.6036,115.1600],
   'Jurien Bay Motel Apartments':[-30.3054,115.0404],
-  'Hutt Lagoon Pink Lake':[-28.1870,114.2460],
+  'Hutt Lagoon Pink Lake Lookout Port Gregory':[-28.1870,114.2460],
   'Geraldton WA':[-28.7774,114.6140],
+  'Coles Geraldton Chapman Road View Street':[-28.768,114.615],
   'Kalbarri Palm Resort':[-27.7111,114.1663],
-  'Kalbarri Skywalk':[-27.7985,114.2452],
-  'Nature’s Window':[-27.6751,114.2437],
-  'Z Bend Lookout':[-27.6530,114.2500],
-  'Hamelin Pool WA':[-26.4090,114.1880],
-  'Shell Beach WA':[-26.2130,113.9730],
-  'Eagle Bluff WA':[-26.1510,113.6770],
+  'Kalbarri Skywalk Car Park':[-27.7985,114.2452],
+  'The Loop and Nature’s Window Car Park':[-27.6751,114.2437],
+  'Z Bend Lookout Car Park':[-27.6530,114.2500],
+  'Hamelin Pool Telegraph Station':[-26.4090,114.1880],
+  'Shell Beach Car Park Shark Bay':[-26.2130,113.9730],
+  'Eagle Bluff Lookout Car Park':[-26.1510,113.6770],
   'RAC Monkey Mia Dolphin Resort':[-25.7930,113.7200],
   'Denham WA':[-25.9277,113.5333],
   'Little Lagoon WA':[-25.8810,113.5490],
   'The Gerald Apartment Hotel':[-28.7732,114.6092],
+  'No Birds Car Hire Fremantle':[-32.047,115.756],
   'Warders Hotel by Garde Fremantle':[-32.0547,115.7492],
   'B Shed Ferry Terminal Fremantle':[-32.0528,115.7435],
   'Pedal & Flipper':[-31.996,115.540],
-  'Lesueur National Park':[-30.17,115.12],
+  'Lesueur Scenic Drive Entry Cockleshell Gully Road':[-30.17,115.12],
   'The Basin Rottnest Island':[-31.9920,115.5400],
   'Wadjemup Lighthouse':[-32.0054,115.5114],
   'West End Rottnest Island':[-32.0064,115.4470],
@@ -960,7 +980,7 @@ function makeMiniRoute(points, idx){
         </svg>`;
   return `<div class="route-map-card map-zoom" data-map-title="当日路线地图">${svg}<span class="zoom-chip">🔍 点开放大</span></div>`;
 }
-const driveNotes={"10/02":"🚗 Perth → Jurien Bay · 约260 km / 约3.5h；经 Lancelin、Pinnacles，避免夜间赶路。","10/03":"🚗 Jurien Bay → Kalbarri · 约390 km / 约4.5h；Lesueur 可机动删除，优先保证 Hutt Lagoon。","10/05":"🚗 Kalbarri → Monkey Mia · 约390 km / 约4.5h；出发前加满油。","10/07":"🚗 Monkey Mia → Geraldton · 约390 km / 约4.5h；途中休息、及时补油。","10/08":"🚗 Geraldton → Perth · 约420 km / 约5h；不要为还车赶路。"};
+const driveNotes={"10/02":"🚗 Perth → Jurien Bay · 约260 km / 约3.5h；经 Lancelin、Pinnacles，避免夜间赶路。","10/03":"🚗 Jurien Bay → Kalbarri · 约390 km / 约4.5h；Lesueur 可机动删除，优先保证 Hutt Lagoon。","10/05":"🚗 Kalbarri → Monkey Mia · 约390 km / 约4.5h；出发前加满油。","10/07":"🚗 Monkey Mia → Geraldton · 约390 km / 约4.5h；途中休息、及时补油。","10/08":"🚗 Geraldton → Fremantle · 约450 km / 约5.5h；若最终仍还 Perth City，则按实际还车点导航，不为还车赶路。"};
 const dayContainer=document.getElementById('dayContainer');
 days.forEach((d,idx)=>{
   const routeUrl=D(d.route[0],d.route[d.route.length-1],d.route.slice(1,-1));
@@ -1004,8 +1024,8 @@ days.forEach((d,idx)=>{
 });
 
 const todos=[
+  ['vn-arrival-card','09/28','填写越南电子入境卡','提前72小时填写，完成后保存确认信息 / 截图。','2026-09-28T09:00:00+08:00'],
   ['visa-receive','等待寄回','收到越南另纸签后核对信息','核对姓名、护照信息、有效期，并离线保存。',''],
-  ['nobirds-return','等待回复','关注 No Birds 提前还车回复','确认是否可10/8提前归还、人工截止时间及 after-hours 流程。',''],
   ['rotto-weather-1','10/01','第一次检查 10/9 Rottnest 天气','重点看降雨、平均风速和阵风；决定是否利用 >7天免费取消 E-bike。','2026-10-01T09:00:00+08:00'],
   ['review-mcity','10/02','评价 M City Hotel Saigon，领取返现','美团：退房后60天内可评价返现；安排在退房次日。','2026-10-02T09:00:00+08:00'],
   ['jurien-key-email','10/02 下午','检查 Jurien Bay 自助入住邮件','确认收到密码 / 取钥匙说明；未收到则联系酒店。','2026-10-02T15:00:00+08:00'],
@@ -1049,7 +1069,7 @@ updatePriority();
 const PACK_KEY='wa-trip-2026-packing-v7';
 let packing; try{packing=JSON.parse(localStorage.getItem(PACK_KEY)||'null')}catch(e){}
 if(!packing) packing={
- '证件 / 文件':[['护照',0],['越南另纸签',0],['驾照及所需英文/翻译材料',0],['实体信用卡',0],['WA Park Pass / 必要打印件',0],['旅行保险资料',0]],
+ '证件 / 文件':[['护照',0],['越南另纸签',0],['中国驾照原件',0],['NAATI 驾照翻译件',0],['NAATI CPN 验证截图（手机离线备用）',0],['实体信用卡',0],['WA Park Pass / 必要打印件',0]],
  '电子设备':[['手机及充电器',0],['充电宝',0],['转换插头',0],['车充 / 充电线',0]],
  '户外 / Rottnest':[['SPF50+ 防晒',0],['帽子',0],['墨镜',0],['防风薄外套',0],['运动鞋',0],['水壶',0]],
  '药品 / 日常':[['常用药品',0],['洗护用品',0]]};
