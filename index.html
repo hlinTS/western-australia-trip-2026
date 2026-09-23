@@ -975,14 +975,12 @@ days.forEach((d,idx)=>{
       ['Lesueur Scenic Drive','Lesueur Scenic Drive Entry Cockleshell Gully Road'],['Hutt Lagoon','Hutt Lagoon Pink Lake Lookout Port Gregory'],['Geraldton','Coles Geraldton Chapman Road View Street'],['Kalbarri Palm Resort','Kalbarri Palm Resort 8 Porter Street'],['Kalbarri Skywalk','Kalbarri Skywalk Car Park'],['Nature’s Window','The Loop and Natures Window Car Park Kalbarri'],['Z Bend','Z Bend Lookout Car Park Kalbarri'],['Hamelin Pool','Hamelin Pool Telegraph Station'],['Shell Beach','Shell Beach Car Park Shark Bay'],['Eagle Bluff','Eagle Bluff Lookout Car Park'],['Ocean Park Aquarium','Ocean Park Aquarium Shark Bay'],['Denham','Denham WA'],['RAC Monkey Mia Dolphin Resort','RAC Monkey Mia Dolphin Resort'],['Little Lagoon','Little Lagoon WA'],
       ['Overlander Roadhouse','Overlander Roadhouse WA'],['The Gerald Apartment Hotel','The Gerald Apartment Hotel 25 Cathedral Avenue Geraldton'],['Eneabba','Eneabba WA'],['Warders Hotel','Warders Hotel by Garde Fremantle'],['Pedal & Flipper','Pedal and Flipper Rottnest Island Bedford Avenue'],['Gibney','Gibney 40 Marine Parade Cottesloe'],['Sardine Jetty','Sardine Jetty 1 Mews Road Fremantle'],['Whale Watch Perth','Whale Watch Perth Sardine Jetty Fremantle'],['Fremantle Station','Fremantle Station WA'],['Citiplace','Citiplace Rest Centre Perth'],['London Court','London Court Perth'],['Elizabeth Quay','Elizabeth Quay Perth'],['Kings Park','Kings Park and Botanic Garden Perth'],['Perth Station','Perth Station WA']
     ];
-    const found=[];
-    placeLinks.forEach(([label,query])=>{if(body.includes(label)){found.push([label,query]);body=body.replace(label,`<a class="place" target="_blank" rel="noopener" href="${G(query)}">${label}</a>`);}});
-    const mapButtons=found.length?`<div class="actions">${found.map(([label,query])=>`<a class="btn small" target="_blank" rel="noopener" href="${G(query)}">📍 ${label} 定位</a>`).join('')}</div>`:'';
+    placeLinks.forEach(([label,query])=>{if(body.includes(label)){body=body.replace(label,`<a class="place" target="_blank" rel="noopener" href="${G(query)}">${label}</a>`);}});
     let badges='';
     if(e[2].includes('已取消')) badges+='<span class="badge">已取消项目</span>';
     if(/开船前5分钟|08:30|不要为了17:30|夜间|日落后|最晚22:00/.test(e[2]+e[1])) badges+='<span class="badge risk">注意时间</span>';
     if(/Island Explorer|FamilyRider|购/.test(e[2]+e[1])) badges+='<span class="badge book">可能需现场/提前购票</span>';
-    return `<div class="event"><div class="ev-time">${e[0]}</div><div class="ev-body"><div class="ev-title">${body}</div><div class="ev-note">${e[2]}</div>${mapButtons}${badges?`<div class="ev-badges">${badges}</div>`:''}</div></div>`;
+    return `<div class="event"><div class="ev-time">${e[0]}</div><div class="ev-body"><div class="ev-title">${body}</div><div class="ev-note">${e[2]}</div>${badges?`<div class="ev-badges">${badges}</div>`:''}</div></div>`;
   }).join('');
   const el=document.createElement('details');
   el.className='card day';
