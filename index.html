@@ -262,6 +262,7 @@ kbd{font-family:inherit;background:var(--chip);border:1px solid var(--line);bord
 .route-map-card svg{display:block;width:100%;height:auto;min-height:180px}
 .route-map-card .zoom-chip{position:absolute;right:9px;bottom:9px;background:rgba(255,255,255,.92);color:#24323a;border:1px solid rgba(0,0,0,.12);padding:5px 8px;border-radius:999px;font-size:11px;font-weight:750}
 .route-map-card .map-caption{position:absolute;left:9px;bottom:9px;background:rgba(255,255,255,.9);color:#52616a;padding:5px 8px;border-radius:999px;font-size:10px}
+.route-options{margin:0 12px 12px;border:1px dashed #d3ad77;border-radius:12px;background:#fff8ec;padding:9px 10px}.route-options b{display:block;color:#715225;font-size:12px;margin-bottom:5px}.route-options .actions{margin:0;gap:6px}.route-options .btn{font-size:11px;padding:6px 8px}
 .todo-date{min-width:72px;font-size:11px;font-weight:800;color:var(--accent);padding-top:2px}
 .todo-item{align-items:flex-start}
 .todo-item input{margin-top:2px}
@@ -694,14 +695,17 @@ const days = [
  ]
 },
 {
- date:'10/03', dow:'周六', city:'Jurien Bay → Lesueur → Hutt Lagoon → Kalbarri',
- summary:'北线自驾 Day 2 · 约405 km / 约5h纯驾驶',
- route:['Jurien Bay Motel Apartments','Lesueur Scenic Drive Entry Cockleshell Gully Road','Hutt Lagoon Pink Lake Lookout Port Gregory','Coles Geraldton Chapman Road View Street','Kalbarri Palm Resort'],
+ date:'10/03', dow:'周六', city:'Jurien Bay → Hutt Lagoon → Kalbarri',
+ summary:'北线自驾 Day 2 · Lesueur / Geraldton 补给均为备选',
+ route:['Jurien Bay Motel Apartments','Hutt Lagoon Pink Lake Lookout Port Gregory','Kalbarri Palm Resort'],
+ alternatives:[
+  {label:'Lesueur Scenic Drive（时间充裕再去）',points:['Jurien Bay Motel Apartments','Lesueur Scenic Drive Entry Cockleshell Gully Road','Hutt Lagoon Pink Lake Lookout Port Gregory']},
+  {label:'Geraldton 补给 / 加油（按需）',points:['Hutt Lagoon Pink Lake Lookout Port Gregory','Coles Geraldton Chapman Road View Street','Kalbarri Palm Resort']}
+ ],
  events:[
-  ['08:00左右','Jurien Bay → Lesueur National Park','走铺装 Lesueur Scenic Drive，约1.5小时；不安排长徒步。若当天进度落后，优先跳过 Lesueur。'],
-  ['约10:00','离开 Lesueur → Hutt Lagoon','继续北上；Lesueur 是机动项，不为了它压缩粉湖时间。'],
+  ['备选','Lesueur Scenic Drive','时间充裕才去；走铺装 Scenic Drive，不安排长徒步或深沙地。'],
   ['中午前后','Hutt Lagoon 粉湖','尽量利用较高太阳角度看湖色；最终以当天云量、风和实际湖色为准。'],
-  ['途中','🛒 Geraldton 大补给 / 加油','建议在 Coles Geraldton 一次补足水、零食和后续几天常用物资，再继续北上。'],
+  ['备选','🛒 Geraldton 大补给 / 加油','仅在油量、水或食物不足时走；会形成南下折返，不纳入主路线。'],
   ['傍晚前','抵达 Kalbarri','尽量避免日落后继续赶北线；最晚不要拖到很晚才入住。'],
   ['晚间','入住 Kalbarri Palm Resort','8 Porter Street。']
  ]
@@ -755,7 +759,11 @@ const days = [
 {
  date:'10/08', dow:'周四', city:'Geraldton → Fremantle / Perth',
  summary:'北线自驾 Day 7 · 约420 km / 5h',
- route:['The Gerald Apartment Hotel','No Birds Car Hire Fremantle','Warders Hotel by Garde Fremantle'],
+ route:['The Gerald Apartment Hotel','Warders Hotel by Garde Fremantle'],
+ alternatives:[
+  {label:'Fremantle 异店还车（AUD 75，待决定）',points:['The Gerald Apartment Hotel','No Birds Car Hire Fremantle','Warders Hotel by Garde Fremantle']},
+  {label:'Perth City 还车（备选）',points:['The Gerald Apartment Hotel','No Birds Car Rental, 160 Adelaide Terrace Perth','Warders Hotel by Garde Fremantle']}
+ ],
  events:[
   ['上午','Geraldton 出发南返','不为还车赶路，安全优先。'],
   ['可选停留','🦞 龙虾工厂','返程途中视时间决定是否停留，可参观 / 吃龙虾；不作为必须项目。'],
@@ -865,9 +873,10 @@ const WA_COAST=[
   [-27.71,114.17],[-26.70,113.95],[-26.20,113.85],[-25.93,113.53],[-25.79,113.72]
 ];
 
-function makeMiniRoute(points, idx){
+function makeMiniRoute(points, idx, alternatives=[]){
   const coords=points.map(p=>({name:p,xy:GEO[p]})).filter(x=>x.xy);
   if(!coords.length) return '';
+  const alternativeCoords=alternatives.map(a=>({label:a.label,coords:a.points.map(p=>({name:p,xy:GEO[p]})).filter(x=>x.xy)})).filter(a=>a.coords.length>1);
 
   // Rottnest gets the official island map from the order wallet instead of a fabricated background.
   if(points.some(p=>p.includes('Rottnest Island'))){
@@ -878,7 +887,8 @@ function makeMiniRoute(points, idx){
   }
 
   const W=760,H=330,pad=48;
-  let lats=coords.map(x=>x.xy[0]), lons=coords.map(x=>x.xy[1]);
+  const allCoords=[...coords,...alternativeCoords.flatMap(a=>a.coords)];
+  let lats=allCoords.map(x=>x.xy[0]), lons=allCoords.map(x=>x.xy[1]);
   let minLat=Math.min(...lats),maxLat=Math.max(...lats),minLon=Math.min(...lons),maxLon=Math.max(...lons);
   let latSpan=Math.max(.05,maxLat-minLat),lonSpan=Math.max(.05,maxLon-minLon);
   minLat-=latSpan*.18; maxLat+=latSpan*.18; minLon-=lonSpan*.18; maxLon+=lonSpan*.18;
@@ -900,8 +910,13 @@ function makeMiniRoute(points, idx){
   const xOf=lon=>pad+(lon-minLon)/(maxLon-minLon)*(W-2*pad);
   const yOf=lat=>pad+(maxLat-lat)/(maxLat-minLat)*(H-2*pad);
 
-  let svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="当日地理路线图">
-    <rect width="${W}" height="${H}" fill="#dceff3"/>`;
+  let svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="当日手绘路线图">
+    <defs>
+      <filter id="rough${idx}"><feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="2" seed="${idx+11}" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4"/></filter>
+      <pattern id="paper${idx}" width="26" height="26" patternUnits="userSpaceOnUse"><rect width="26" height="26" fill="#d9f0ef"/><path d="M0 8 Q8 4 26 8 M0 19 Q10 15 26 19" fill="none" stroke="rgba(68,111,130,.08)" stroke-width="1"/></pattern>
+      <marker id="arrow${idx}" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#143e68"/></marker>
+    </defs>
+    <rect width="${W}" height="${H}" fill="url(#paper${idx})"/>`;
 
   const coast=WA_COAST.filter(([la,lo])=>la>=minLat-.4&&la<=maxLat+.4&&lo>=minLon-.6&&lo<=maxLon+.6);
   if(coast.length>=2){
@@ -911,44 +926,45 @@ function makeMiniRoute(points, idx){
     // land is east/right of west coast
     const last=cpts[cpts.length-1], first=cpts[0];
     const land=d+` L${W} ${last[1]} L${W} ${first[1]} Z`;
-    svg+=`<path d="${land}" fill="#edf0df"/><path d="${d}" fill="none" stroke="#8ab3b5" stroke-width="3"/>`;
+    svg+=`<path d="${land}" fill="#f0edd6" filter="url(#rough${idx})"/><path d="${d}" fill="none" stroke="#79b4bb" stroke-width="4" filter="url(#rough${idx})"/>`;
   } else {
-    svg+=`<rect x="0" y="0" width="${W}" height="${H}" fill="#edf0df"/>`;
+    svg+=`<rect x="0" y="0" width="${W}" height="${H}" fill="#f0edd6"/>`;
   }
 
-  // subtle lat/lon grid, unique because bbox is unique
-  svg+=`<g stroke="#d7dccf" stroke-width="1" opacity=".65">`;
-  for(let i=1;i<5;i++){const x=pad+i*(W-2*pad)/5; svg+=`<line x1="${x}" y1="${pad}" x2="${x}" y2="${H-pad}"/>`;}
-  for(let i=1;i<4;i++){const y=pad+i*(H-2*pad)/4; svg+=`<line x1="${pad}" y1="${y}" x2="${W-pad}" y2="${y}"/>`;}
-  svg+=`</g>`;
-
-  const palette=['#d56f4b','#4f8fb5','#7c6bb0','#5c9b68','#c69334','#b85b88','#278d8d','#d1843f','#657fc0','#4b9774','#8c68a7'];
-  const c=palette[idx%palette.length];
+  const c='#143e68';
   let route='';
   coords.forEach((p,i)=>{
     const [la,lo]=p.xy, x=xOf(lo), y=yOf(la);
     route+=(i?' L':'M')+x+' '+y;
   });
-  svg+=`<path d="${route}" fill="none" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="${route}" fill="none" stroke="${c}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;
+  svg+=`<path d="${route}" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="${route}" fill="none" stroke="${c}" stroke-width="5" stroke-dasharray="3 10" marker-mid="url(#arrow${idx})" marker-end="url(#arrow${idx})" stroke-linecap="round" stroke-linejoin="round"/>`;
+  alternativeCoords.forEach((a,n)=>{
+    let d=''; a.coords.forEach((p,i)=>{const [la,lo]=p.xy;d+=(i?' L':'M')+xOf(lo)+' '+yOf(la)});
+    svg+=`<path d="${d}" fill="none" stroke="rgba(255,255,255,.82)" stroke-width="9" stroke-linecap="round"/>
+      <path d="${d}" fill="none" stroke="#c58a45" stroke-width="4" stroke-dasharray="8 7" marker-end="url(#arrow${idx})" stroke-linecap="round"/>`;
+  });
 
   coords.forEach((p,i)=>{
     const [la,lo]=p.xy, x=xOf(lo), y=yOf(la);
     const short=p.name.replace(/Hotel|Resort|Apartments|International|Terminal|Car Rental|Ferry Terminal/gi,'').trim().slice(0,18);
-    const dy=i%2?24:-13;
-    svg+=`<circle cx="${x}" cy="${y}" r="${i===0||i===coords.length-1?8:6}" fill="${i===0?'#2f855a':(i===coords.length-1?'#c05621':c)}" stroke="white" stroke-width="3"/>
-          <text x="${x}" y="${y+dy}" text-anchor="middle" font-size="${coords.length>6?10:11}" font-weight="700" fill="#33434a" stroke="rgba(255,255,255,.85)" stroke-width="3" paint-order="stroke">${short}</text>`;
+    const dy=i%2?26:-16;
+    svg+=`<circle cx="${x}" cy="${y}" r="${i===0||i===coords.length-1?11:9}" fill="${i===0?'#2d8e83':(i===coords.length-1?'#d66b58':c)}" stroke="#fffaf0" stroke-width="4"/>
+          <text x="${x}" y="${y+4}" text-anchor="middle" font-size="10" font-weight="900" fill="white">${i+1}</text>
+          <text x="${x}" y="${y+dy}" text-anchor="middle" font-size="${coords.length>6?10:11}" font-weight="700" fill="#33434a" stroke="rgba(255,250,240,.92)" stroke-width="4" paint-order="stroke">${short}</text>`;
   });
-  svg+=`<text x="18" y="24" font-size="10" fill="#60757b">按实际经纬度相对位置绘制 · 非道路导航底图</text>
+  svg+=`<text x="18" y="24" font-size="10" font-weight="700" fill="#60757b">实线：既定路线${alternativeCoords.length?' · 虚线：备选路线':''}</text>
         <text x="${W-36}" y="32" text-anchor="middle" font-size="11" fill="#44565c">N</text>
         <path d="M${W-36} 52 L${W-36} 35 M${W-42} 42 L${W-36} 34 L${W-30} 42" fill="none" stroke="#44565c" stroke-width="2"/>
         </svg>`;
   return `<div class="route-map-card map-zoom" data-map-title="当日路线地图">${svg}<span class="zoom-chip">🔍 点开放大</span></div>`;
 }
-const driveNotes={"10/02":"🚗 Perth → Jurien Bay · 约260 km / 约3.5h；经 Lancelin、Pinnacles，避免夜间赶路。","10/03":"🚗 Jurien Bay → Kalbarri · 约390 km / 约4.5h；Lesueur 可机动删除，优先保证 Hutt Lagoon。","10/05":"🚗 Kalbarri → Monkey Mia · 约390 km / 约4.5h；出发前加满油。","10/07":"🚗 Monkey Mia → Geraldton · 约390 km / 约4.5h；途中休息、及时补油。","10/08":"🚗 Geraldton → Fremantle · 约450 km / 约5.5h；若最终仍还 Perth City，则按实际还车点导航，不为还车赶路。"};
+const driveNotes={"10/02":"🚗 Perth → Jurien Bay · 约260 km / 约3.5h；经 Lancelin、Pinnacles，避免夜间赶路。","10/03":"🚗 Jurien Bay → Kalbarri · 约390 km / 约4.5h；主线经 Hutt Lagoon，Lesueur 与 Geraldton 补给均按需打开备选导航。","10/05":"🚗 Kalbarri → Monkey Mia · 约390 km / 约4.5h；出发前加满油。","10/07":"🚗 Monkey Mia → Geraldton · 约390 km / 约4.5h；途中休息、及时补油。","10/08":"🚗 Geraldton → Fremantle · 约450 km / 约5.5h；若最终仍还 Perth City，则按实际还车点导航，不为还车赶路。"};
 const dayContainer=document.getElementById('dayContainer');
 days.forEach((d,idx)=>{
   const routeUrl=D(d.route[0],d.route[d.route.length-1],d.route.slice(1,-1));
+  const alternatives=d.alternatives||[];
+  const alternativeHtml=alternatives.length?`<div class="route-options"><b>备选路线 · 不计入默认导航</b><div class="actions">${alternatives.map(a=>`<a class="btn small" target="_blank" rel="noopener" href="${D(a.points[0],a.points[a.points.length-1],a.points.slice(1,-1))}">${a.label}</a>`).join('')}</div></div>`:'';
   const evHtml=d.events.map(e=>{
     let body=e[1];
     const placePatterns=[
@@ -978,7 +994,8 @@ days.forEach((d,idx)=>{
     </summary>
     <div class="route-panel">
       ${driveNotes[d.date]?`<div class="drive-strip"><b>驾驶提醒</b> · ${driveNotes[d.date]}</div>`:""}
-      ${makeMiniRoute(d.route,idx)}
+      ${makeMiniRoute(d.route,idx,alternatives)}
+      ${alternativeHtml}
       <div class="actions">
         <a class="btn primary" target="_blank" rel="noopener" href="${routeUrl}">一键打开全天多点导航</a>
         <span class="btn small">地图可点开放大 · 导航以 Google Maps 实时结果为准</span>
