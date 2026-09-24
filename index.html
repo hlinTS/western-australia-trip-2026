@@ -78,6 +78,12 @@ section{scroll-margin-top:70px;margin-top:18px}
 .focus-label{font-size:12px;color:var(--accent);font-weight:800;letter-spacing:.08em}
 .focus-event{font-size:20px;font-weight:800;margin:4px 0 2px}
 .focus-meta{color:var(--muted);font-size:13px}
+.focus-priority{margin-top:16px;padding-top:15px;border-top:1px solid var(--line)}
+.focus-priority-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-top:4px}
+.focus-priority-copy{min-width:0;flex:1}
+.focus-priority .focus-event{font-size:17px;line-height:1.35;margin:0 0 2px}
+.focus-todo-link{flex:0 0 auto;color:var(--accent);font-size:12px;font-weight:800;text-decoration:none;border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line));background:color-mix(in srgb,var(--accent) 7%,var(--card));border-radius:999px;padding:4px 8px}
+.focus-footnote{margin-top:10px;color:var(--muted);font-size:12px}
 .countdown{font-variant-numeric:tabular-nums;display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:16px}
 .cd{background:var(--chip);border-radius:14px;padding:10px 6px;text-align:center}
 .cd b{display:block;font-size:25px;line-height:1.1}
@@ -121,6 +127,9 @@ section{scroll-margin-top:70px;margin-top:18px}
 .ev-time{font-variant-numeric:tabular-nums;font-weight:800;font-size:13px;color:var(--accent)}
 .ev-body{position:relative;padding-left:13px}
 .ev-body::before{content:"";position:absolute;left:-1px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--card)}
+.ev-content{display:flex;align-items:flex-start;gap:8px}
+.ev-icon{width:28px;height:28px;flex:0 0 28px;display:grid;place-items:center;margin-top:-2px;border:1px solid color-mix(in srgb,var(--accent) 20%,var(--line));border-radius:9px;background:color-mix(in srgb,var(--accent) 8%,var(--card));font-size:15px;line-height:1}
+.ev-copy{min-width:0;flex:1}
 .ev-title{font-weight:760}
 .ev-note{color:var(--muted);font-size:13px;margin-top:2px}
 .ev-badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px}
@@ -155,6 +164,7 @@ kbd{font-family:inherit;background:var(--chip);border:1px solid var(--line);bord
   .event{grid-template-columns:64px 1fr}
   .event:not(:last-child)::after{left:71px}
   .rows{grid-template-columns:82px 1fr}
+  .focus-priority-row{gap:8px}
 }
 
 .flight-carousel{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 10px}
@@ -182,15 +192,6 @@ kbd{font-family:inherit;background:var(--chip);border:1px solid var(--line);bord
 
 
 /* V4: compact order wallet */
-.wallet-overview{padding:14px;margin-bottom:10px}
-.wallet-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.wallet-stat{background:var(--chip);border-radius:13px;padding:10px;text-align:center}
-.wallet-stat b{display:block;font-size:20px;line-height:1.1}
-.wallet-stat span{font-size:11px;color:var(--muted)}
-.wallet-next{margin-top:10px;padding:12px;border:1px solid var(--line);border-radius:13px;background:color-mix(in srgb,var(--accent) 7%,var(--card))}
-.wallet-next .tag{font-size:11px;color:var(--accent);font-weight:850;letter-spacing:.08em}
-.wallet-next b{display:block;margin-top:2px}
-.wallet-next span{color:var(--muted);font-size:12px}
 
 .wallet-cat{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:9px;overflow:hidden;box-shadow:var(--shadow)}
 .wallet-cat>summary{list-style:none;cursor:pointer;padding:14px 15px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:800}
@@ -263,11 +264,13 @@ kbd{font-family:inherit;background:var(--chip);border:1px solid var(--line);bord
 .route-map-card .zoom-chip{position:absolute;right:9px;bottom:9px;background:rgba(255,255,255,.92);color:#24323a;border:1px solid rgba(0,0,0,.12);padding:5px 8px;border-radius:999px;font-size:11px;font-weight:750}
 .route-map-card .map-caption{position:absolute;left:9px;bottom:9px;background:rgba(255,255,255,.9);color:#52616a;padding:5px 8px;border-radius:999px;font-size:10px}
 .route-map-card .watercolor-route{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:contain;background:#fff}
-.route-options{margin:0 12px 12px;border:1px dashed #d3ad77;border-radius:12px;background:#fff8ec;padding:9px 10px}.route-options b{display:block;color:#715225;font-size:12px;margin-bottom:5px}.route-options .actions{margin:0;gap:6px}.route-options .btn{font-size:11px;padding:6px 8px}
+.departure-nav-panel{padding:12px 14px}.departure-nav-label{display:block;color:var(--muted);font-size:12px;margin-bottom:1px}.departure-nav-note{color:var(--muted);font-size:12px}
 .todo-date{min-width:72px;font-size:11px;font-weight:800;color:var(--accent);padding-top:2px}
 .todo-item{align-items:flex-start}
 .todo-item input{margin-top:2px}
 @media(max-width:560px){.todo-date{min-width:58px}.route-map-card svg{min-height:150px}}
+
+.itinerary-note{display:flex;flex-direction:column;align-items:flex-end;gap:1px;text-align:right;line-height:1.35}.itinerary-note .expand-hint{font-size:11px;opacity:.82}
 
 
 .supply-shell{overflow:hidden;margin-top:10px}.supply-shell>summary{list-style:none;cursor:pointer;padding:15px 16px;display:flex;justify-content:space-between;align-items:center;font-weight:800}.supply-shell>summary::-webkit-details-marker{display:none}.supply-shell>summary:after{content:"＋";color:var(--muted)}.supply-shell[open]>summary:after{content:"－"}.supply-body{padding:0 14px 14px;border-top:1px solid var(--line)}.supply-row{padding:11px 0;border-bottom:1px solid var(--line)}.supply-row:last-child{border-bottom:0}.supply-row b{display:block}.supply-row span{display:block;color:var(--muted);font-size:12px}.supply-row .actions{margin-top:7px}
@@ -296,27 +299,36 @@ kbd{font-family:inherit;background:var(--chip);border:1px solid var(--line);bord
 <a href="#tips">贴士</a>
 </nav>
 <section id="focus">
-<div class="section-title"><h2>此刻关注</h2><small>每秒自动更新</small></div>
+<div class="section-title"><h2>此刻关注</h2><small>行程倒计时每秒更新</small></div>
 <div class="card focus">
-<div class="focus-top">
-<div>
-<div class="focus-label">当前优先事项</div>
-<div class="focus-event" id="priorityTitle">读取中…</div>
-<div class="focus-meta" id="priorityMeta"></div>
-<div class="focus-label" style="margin-top:12px">NEXT CONFIRMED EVENT</div>
-<div class="focus-event" id="nextTitle" style="font-size:18px">读取中…</div>
-<div class="focus-meta" id="nextMeta"></div>
+<div class="focus-trip">
+  <div class="focus-top">
+    <div>
+      <div class="focus-label">行程倒计时 · 已确认</div>
+      <div class="focus-event" id="nextTitle">读取中…</div>
+      <div class="focus-meta" id="nextMeta"></div>
+    </div>
+    <span class="status" id="nextStatus">待出发</span>
+  </div>
+  <div class="countdown">
+  <div class="cd"><b id="cdD">--</b><span>天</span></div>
+  <div class="cd"><b id="cdH">--</b><span>时</span></div>
+  <div class="cd"><b id="cdM">--</b><span>分</span></div>
+  <div class="cd"><b id="cdS">--</b><span>秒</span></div>
+  </div>
+  <div class="timezone-note" id="tzNote">所有事件使用明确 UTC 偏移计算，跨时区打开不会改变倒计时。</div>
 </div>
-<span class="status" id="nextStatus">待出发</span>
+<div class="focus-priority">
+  <div class="focus-label">待办优先 · 不倒计时</div>
+  <div class="focus-priority-row">
+    <div class="focus-priority-copy">
+      <div class="focus-event" id="priorityTitle">读取中…</div>
+      <div class="focus-meta" id="priorityMeta"></div>
+    </div>
+    <a class="focus-todo-link" href="#todo">查看待办</a>
+  </div>
 </div>
-<div class="countdown">
-<div class="cd"><b id="cdD">--</b><span>天</span></div>
-<div class="cd"><b id="cdH">--</b><span>时</span></div>
-<div class="cd"><b id="cdM">--</b><span>分</span></div>
-<div class="cd"><b id="cdS">--</b><span>秒</span></div>
-</div>
-<div class="timezone-note" id="tzNote">所有事件使用明确 UTC 偏移计算，跨时区打开不会改变倒计时。</div>
-<div class="alert" id="focusAlert">优先事项会根据待办完成情况自动切换；大号倒计时始终对应“下一项已确认行程”。</div>
+<div class="focus-footnote">倒计时仅对应上方已确认行程；待办完成后会自动更新。</div>
 </div>
 </section>
 <section id="map">
@@ -385,14 +397,6 @@ kbd{font-family:inherit;background:var(--chip);border:1px solid var(--line);bord
 </section>
 <section id="confirmed">
 <div class="section-title"><h2>订单钱包</h2><small>默认收起，需要时再查详情</small></div>
-<div class="card wallet-overview">
-<div class="wallet-stats"><div class="wallet-stat"><b>7</b><span>酒店</span></div><div class="wallet-stat"><b>4</b><span>交通出行</span></div><div class="wallet-stat"><b>2</b><span>活动门票</span></div></div>
-<div class="wallet-next" id="walletNext">
-<div class="tag">NEXT ORDER</div>
-<b id="walletNextTitle">读取中…</b>
-<span id="walletNextMeta"></span>
-</div>
-</div>
 <details class="wallet-cat" id="wallet-hotels">
 <summary><span>🏨 酒店</span><span class="cat-meta">7项 · 点开看入住/退房、房型、早餐</span></summary>
 <div class="wallet-list">
@@ -555,7 +559,7 @@ kbd{font-family:inherit;background:var(--chip);border:1px solid var(--line);bord
 
 </section>
 <section id="days">
-<div class="section-title"><h2>逐日行程</h2><small>时间均为当地主时区</small></div>
+<div class="section-title"><h2>逐日行程</h2><div class="itinerary-note"><small>时间均为当地时区</small><small class="expand-hint">点按每日卡片展开详情</small></div></div>
 <div id="dayContainer"></div>
 </section>
 <section id="todo">
@@ -606,6 +610,7 @@ const D = (origin,destination,waypoints=[]) => {
   if(waypoints.length) u+='&waypoints='+encodeURIComponent(waypoints.join('|'));
   return u;
 };
+const DTo = destination => 'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(destination)+'&travelmode=driving';
 
 const events = [
   {t:'2026-09-30T11:45:00+08:00', title:'预约送机 → 上海浦东机场 T1', meta:'上海时间 UTC+8'},
@@ -662,11 +667,11 @@ const days = [
  summary:'VN525 抵达 · 胡志明夜游',
  route:['上海浦东国际机场 T1','Tan Son Nhat International Airport T2','M City Hotel Saigon','Ho Thi Ky Food Street','Sa Spa & Onsen Ho Chi Minh City','M City Hotel Saigon'],
  events:[
-  ['11:45','预约送机 → 浦东机场 T1','家庭上车地点已从公开版隐藏。'],
-  ['15:10','VN525 上海浦东 T1 → 胡志明新山一 T2','18:30 抵达；时间均为当地时间。'],
-  ['抵达后','入住 M City Hotel Saigon','52B Phạm Hồng Thái；放好行李后再出门。'],
-  ['晚饭','Hồ Thị Kỷ Food Street','逛吃越南本地小吃；目标：海甲虫。'],
-  ['可选','Sả Spa & Onsen','吃完如果时间和体力合适再去；Spa 在酒店附近，结束后回酒店休息。']
+  ['11:45','预约送机 → 浦东机场 T1','家庭上车地点已从公开版隐藏。','🚗'],
+  ['15:10','VN525 上海浦东 T1 → 胡志明新山一 T2','18:30 抵达；时间均为当地时间。','✈️'],
+  ['抵达后','入住 M City Hotel Saigon','52B Phạm Hồng Thái；放好行李后再出门。','🏨'],
+  ['晚饭','Hồ Thị Kỷ Food Street','逛吃越南本地小吃；目标：海甲虫。','🍜'],
+  ['可选','Sả Spa & Onsen','吃完如果时间和体力合适再去；Spa 在酒店附近，结束后回酒店休息。','💆']
  ]
 },
 {
@@ -674,14 +679,14 @@ const days = [
  summary:'西贡半日 · 15:20 飞珀斯',
  route:['M City Hotel Saigon','Independence Palace Ho Chi Minh City','Notre Dame Cathedral of Saigon','Saigon Central Post Office','The Cafe Apartment 42 Nguyen Hue','M City Hotel Saigon','Tan Son Nhat International Airport T2','Perth Airport T1','Metro Hotel Perth City'],
  events:[
-  ['约08:00','西贡半日开始','从酒店出发，上午活动集中在 District 1。'],
-  ['上午','独立宫','作为上午第一站。'],
-  ['随后','中央邮局 / 圣母大教堂一带','以建筑街区散步为主；圣母大教堂以外观为主。'],
-  ['上午后段','The Cafe Apartment','挑一家喜欢的咖啡店坐坐，不需要逐层打卡。'],
-  ['约11:00','回酒店取行李','不再固定安排午饭；可在咖啡楼简单吃或到机场再吃。'],
-  ['约11:30','从酒店出发去 SGN','目标约12:20抵达机场，为国际航班预留充足时间。'],
-  ['15:20','VN791 胡志明新山一 T2 → 珀斯 T1','22:30 抵达珀斯。'],
-  ['夜间','机场 → Metro Hotel Perth City','抵达后直接入住休息，不安排 Perth Citywalk。']
+  ['约08:00','西贡半日开始','从酒店出发，上午活动集中在 District 1。','🚶'],
+  ['上午','独立宫','作为上午第一站。','🏛️'],
+  ['随后','中央邮局 / 圣母大教堂一带','以建筑街区散步为主；圣母大教堂以外观为主。','🏛️'],
+  ['上午后段','The Cafe Apartment','挑一家喜欢的咖啡店坐坐，不需要逐层打卡。','☕'],
+  ['约11:00','回酒店取行李','不再固定安排午饭；可在咖啡楼简单吃或到机场再吃。','🧳'],
+  ['约11:30','从酒店出发去 SGN','目标约12:20抵达机场，为国际航班预留充足时间。','✈️'],
+  ['15:20','VN791 胡志明新山一 T2 → 珀斯 T1','22:30 抵达珀斯。','✈️'],
+  ['夜间','机场 → Metro Hotel Perth City','抵达后直接入住休息，不安排 Perth Citywalk。','🚗']
  ]
 },
 {
@@ -689,11 +694,11 @@ const days = [
  summary:'北线自驾 Day 1',
  route:['Metro Hotel Perth City','No Birds Car Rental, 160 Adelaide Terrace Perth','Corica Pastries Northbridge','Parkside Coffee Perth','Lancelin Sand Dunes Carpark Beacon Road','Endeavour Tavern Lancelin','Pinnacles Desert Discovery Centre','Jurien Bay Motel Apartments'],
  events:[
-  ['上午','退房 · 取车 · 苹果派 · 咖啡','Metro Hotel 退房 → No Birds 取车 → Corica 买苹果派 → Parkside Coffee，完成后正式北上。'],
-  ['中午前后','Lancelin Sand Dunes','导航 Beacon Rd 沙丘入口 / 停车区；租车停硬地，不驶入沙地。'],
-  ['午餐','Endeavour Tavern','Lancelin 海边午餐；之后继续北上。'],
-  ['下午 / 傍晚','The Pinnacles / 尖峰石阵','偏下午 / 傍晚光线更好；可看日落，条件合适可稍留看星星。'],
-  ['晚间','Jurien Bay','入住 Jurien Bay Motel Apartments；留意自助入住 / 取钥匙信息。']
+  ['上午','退房 · 取车 · 苹果派 · 咖啡','Metro Hotel 退房 → No Birds 取车 → Corica 买苹果派 → Parkside Coffee，完成后正式北上。','🚗'],
+  ['中午前后','Lancelin Sand Dunes','导航 Beacon Rd 沙丘入口 / 停车区；租车停硬地，不驶入沙地。','🏜️'],
+  ['午餐','Endeavour Tavern','Lancelin 海边午餐；之后继续北上。','🍽️'],
+  ['下午 / 傍晚','The Pinnacles / 尖峰石阵','偏下午 / 傍晚光线更好；可看日落，条件合适可稍留看星星。','🪨'],
+  ['晚间','Jurien Bay','入住 Jurien Bay Motel Apartments；留意自助入住 / 取钥匙信息。','🏨']
  ]
 },
 {
@@ -705,10 +710,10 @@ const days = [
   {label:'Geraldton 补给 / 加油（按需）',points:['Hutt Lagoon Pink Lake Lookout Port Gregory','Coles Geraldton Chapman Road View Street','Kalbarri Palm Resort']}
  ],
  events:[
-  ['可选','Lesueur Scenic Drive','时间充裕再去；走铺装 Scenic Drive，不安排长徒步。'],
-  ['中午前后','Hutt Lagoon 粉湖','尽量利用较高太阳角度看湖色；实际效果看当天云量、风和湖色。'],
-  ['可选','Geraldton 补给 / 加油','有需要才去；需南下折返，不纳入默认路线。'],
-  ['傍晚前','Kalbarri','抵达后入住 Kalbarri Palm Resort。']
+  ['可选','Lesueur Scenic Drive','时间充裕再去；走铺装 Scenic Drive，不安排长徒步。','🚗'],
+  ['中午前后','Hutt Lagoon 粉湖','尽量利用较高太阳角度看湖色；实际效果看当天云量、风和湖色。','🩷'],
+  ['可选','Geraldton 补给 / 加油','有需要才去；需南下折返，不纳入默认路线。','⛽'],
+  ['傍晚前','Kalbarri','抵达后入住 Kalbarri Palm Resort。','🏨']
  ]
 },
 {
@@ -716,9 +721,9 @@ const days = [
  summary:'Kalbarri National Park 全天',
  route:['Kalbarri Palm Resort','Kalbarri Skywalk Car Park','The Loop and Nature’s Window Car Park','Z Bend Lookout Car Park','Kalbarri Palm Resort'],
  events:[
-  ['①','Kalbarri Skywalk','停车后步行前往观景平台，以峡谷观景为主。'],
-  ['②','Nature’s Window / The Loop','同一停车节点；Nature’s Window 为主要短线，The Loop 根据当天体力、天气决定。'],
-  ['③','Z Bend','同一停车节点；Lookout 为基础选择，River Trail / Four Ways 根据体力择一。']
+  ['①','Kalbarri Skywalk','停车后步行前往观景平台，以峡谷观景为主。','🌉'],
+  ['②','Nature’s Window / The Loop','同一停车节点；Nature’s Window 为主要短线，The Loop 根据当天体力、天气决定。','🥾'],
+  ['③','Z Bend','同一停车节点；Lookout 为基础选择，River Trail / Four Ways 根据体力择一。','🌄']
  ]
 },
 {
@@ -726,11 +731,11 @@ const days = [
  summary:'Shark Bay 顺路景点 → Monkey Mia',
  route:['Kalbarri Palm Resort','Hamelin Pool Telegraph Station','Shell Beach Car Park Shark Bay','Eagle Bluff Lookout Car Park','RAC Monkey Mia Dolphin Resort'],
  events:[
-  ['途中','Hamelin Pool','顺路停留。'],
-  ['途中','Shell Beach','顺路游览贝壳海滩。'],
-  ['途中','Eagle Bluff','停车后前往观景区域。'],
-  ['可选','Ocean Park Aquarium / Denham','根据当天时间和兴趣决定；Denham 可吃饭、购物或补给。'],
-  ['下午','Monkey Mia','抵达后入住 RAC Monkey Mia Dolphin Resort；当天不再安排硬任务。']
+  ['途中','Hamelin Pool','顺路停留。','🪨'],
+  ['途中','Shell Beach','顺路游览贝壳海滩。','🐚'],
+  ['途中','Eagle Bluff','停车后前往观景区域。','🔭'],
+  ['可选','Ocean Park Aquarium / Denham','根据当天时间和兴趣决定；Denham 可吃饭、购物或补给。','🐠'],
+  ['下午','Monkey Mia','抵达后入住 RAC Monkey Mia Dolphin Resort；当天不再安排硬任务。','🏨']
  ]
 },
 {
@@ -738,9 +743,9 @@ const days = [
  summary:'海豚首选日 · 轻松度假',
  route:['RAC Monkey Mia Dolphin Resort','Little Lagoon WA','Denham WA','RAC Monkey Mia Dolphin Resort'],
  events:[
-  ['🐬','Monkey Mia 海豚 · 首选日','10/6、10/7 两个早晨都有机会；今天优先参加，按度假村当天官方安排到场。'],
-  ['🏖️','自由活动','海滩、度假村活动、散步休息，当天不安排长距离驾驶。'],
-  ['可选','Little Lagoon / Denham','根据当天状态临时决定，不作为必须完成项目。']
+  ['','Monkey Mia 海豚 · 首选日','10/6、10/7 两个早晨都有机会；今天优先参加，按度假村当天官方安排到场。','🐬'],
+  ['','自由活动','海滩、度假村活动、散步休息，当天不安排长距离驾驶。','🏖️'],
+  ['可选','Little Lagoon / Denham','根据当天状态临时决定，不作为必须完成项目。','🌊']
  ]
 },
 {
@@ -748,10 +753,10 @@ const days = [
  summary:'海豚第二次机会 · 南返 Geraldton',
  route:['RAC Monkey Mia Dolphin Resort','Overlander Roadhouse','The Gerald Apartment Hotel'],
  events:[
-  ['🐬','Monkey Mia 海豚 · 第二次机会','如10/6未参加、体验不理想或想再看一次，今天可再去；否则直接进入返程。'],
-  ['⛽','途中加油 / 休息','优先考虑 Overlander Roadhouse；如果出发时油量已经不高，也可以提前在 Denham 补油，不必为了固定加油点硬撑。'],
-  ['🚗','南返 Geraldton','当天以长途驾驶为主，途中按实际需要休息。'],
-  ['🏨','Geraldton','入住 The Gerald Apartment Hotel。']
+  ['','Monkey Mia 海豚 · 第二次机会','如10/6未参加、体验不理想或想再看一次，今天可再去；否则直接进入返程。','🐬'],
+  ['','途中加油 / 休息','优先考虑 Overlander Roadhouse；如果出发时油量已经不高，也可以提前在 Denham 补油，不必为了固定加油点硬撑。','⛽'],
+  ['','南返 Geraldton','当天以长途驾驶为主，途中按实际需要休息。','🚗'],
+  ['','Geraldton','入住 The Gerald Apartment Hotel。','🏨']
  ]
 },
 {
@@ -759,10 +764,10 @@ const days = [
  summary:'南返 · Fremantle 异店还车',
  route:['The Gerald Apartment Hotel','Eneabba WA','No Birds Car Hire Fremantle','Warders Hotel by Garde Fremantle'],
  events:[
-  ['⛽','途中加油 / 休息','出发时先看油量；途中选择合适的加油站补油并休息。Eneabba 可作为优先选择，但不必为了固定地点绕路。'],
-  ['可选','🦞 龙虾工厂','返程途中视时间决定是否停留，可参观 / 吃龙虾，不作为必须项目。'],
-  ['抵达后','🚗 No Birds Fremantle 还车','已确定 Fremantle 异店还车，relocation fee AUD 75；还车前确认油量符合租车要求，并拍车身、油表 / 里程和交车状态留证。'],
-  ['晚间','🏨 Warders Hotel','还车后前往酒店，北线自驾正式结束。']
+  ['','途中加油 / 休息','出发时先看油量；途中选择合适的加油站补油并休息。Eneabba 可作为优先选择，但不必为了固定地点绕路。','⛽'],
+  ['可选','龙虾工厂','返程途中视时间决定是否停留，可参观 / 吃龙虾，不作为必须项目。','🦞'],
+  ['抵达后','No Birds Fremantle 还车','已确定 Fremantle 异店还车，relocation fee AUD 75；还车前确认油量符合租车要求，并拍车身、油表 / 里程和交车状态留证。','🚗'],
+  ['晚间','Warders Hotel','还车后前往酒店，北线自驾正式结束。','🏨']
  ]
 },
 {
@@ -770,13 +775,13 @@ const days = [
  summary:'10:00 去 · 17:30 回 · E-bike 环岛',
  route:['Warders Hotel by Garde Fremantle','B Shed Ferry Terminal Fremantle','Pedal & Flipper','Little Salmon Bay Rottnest Island','Wadjemup Lighthouse','West End Rottnest Island','Cathedral Rocks Rottnest Island','Geordie Bay Rottnest Island','Longreach Bay Rottnest Island','Pedal & Flipper','B Shed Ferry Terminal Fremantle'],
  events:[
-  ['10:00','⛴️ Fremantle → Rottnest','已预订船班；提前到码头候船。'],
-  ['10:30','🚲 Pedal & Flipper 取 E-bike','已预订 2 辆；取车点在 Hotel Rottnest 后方 Bedford Avenue。取车时确认当天最晚还车时间。'],
-  ['白天','🚲 E-bike 环岛','南岸海湾 → Wadjemup Lighthouse → West End → Cathedral Rocks → 北岸海湾 → Settlement；根据风况和体力机动取舍。'],
-  ['约15:50','🚲 归还 E-bike','具体最晚还车时间以当天取车时确认为准。'],
-  ['17:00前','⛴️ 回到码头候船','为17:30回程船预留余量。'],
-  ['17:30','⛴️ Rottnest → Fremantle','已预订回程船班。'],
-  ['19:15','🍽️ Gibney · 已预订','2人 · Dining Room · 40 Marine Parade, Cottesloe；预订时段19:15–21:30，Smart dress。']
+  ['10:00','Fremantle → Rottnest','已预订船班；提前到码头候船。','⛴️'],
+  ['10:30','Pedal & Flipper 取 E-bike','已预订 2 辆；取车点在 Hotel Rottnest 后方 Bedford Avenue。取车时确认当天最晚还车时间。','🚲'],
+  ['白天','E-bike 环岛','南岸海湾 → Wadjemup Lighthouse → West End → Cathedral Rocks → 北岸海湾 → Settlement；根据风况和体力机动取舍。','🚲'],
+  ['约15:50','归还 E-bike','具体最晚还车时间以当天取车时确认为准。','🚲'],
+  ['17:00前','回到码头候船','为17:30回程船预留余量。','⛴️'],
+  ['17:30','Rottnest → Fremantle','已预订回程船班。','⛴️'],
+  ['19:15','Gibney · 已预订','2人 · Dining Room · 40 Marine Parade, Cottesloe；预订时段19:15–21:30，Smart dress。','🍽️']
  ]
 },
 {
@@ -784,22 +789,24 @@ const days = [
  summary:'观鲸 → Perth Citywalk → 机场',
  route:['Warders Hotel by Garde Fremantle','Sardine Jetty Fremantle','Warders Hotel by Garde Fremantle','Fremantle Station','Citiplace Rest Centre Perth','London Court Perth','Elizabeth Quay Perth','Kings Park and Botanic Garden','Perth Station','Perth Airport Terminal 1'],
  events:[
-  ['上午','🧳 Warders Hotel 退房 / 寄存行李','先把行李留在酒店，再前往观鲸码头。'],
-  ['09:00','🐋 Whale Watch Perth','Sardine Jetty；08:30前抵达、08:45登船、08:55关闸。'],
-  ['观鲸后','🧳 返回 Warders 取行李','取完行李后搭火车前往 Perth。'],
-  ['下午','🧳 Perth Station / Citiplace 寄存','放下行李后开始 Perth Citywalk。'],
-  ['下午～晚间','🌆 Perth Citywalk','London Court / St Georges Terrace → Elizabeth Quay → Kings Park → CBD 晚饭。'],
-  ['约20:30','🧳 取行李 → 机场','不拖到 locker 最晚时间；前往机场准备10/11 00:25航班。']
+  ['上午','Warders Hotel 退房 / 寄存行李','先把行李留在酒店，再前往观鲸码头。','🧳'],
+  ['09:00','Whale Watch Perth','Sardine Jetty；08:30前抵达、08:45登船、08:55关闸。','🐋'],
+  ['观鲸后','返回 Warders 取行李','取完行李后搭火车前往 Perth。','🧳'],
+  ['下午','Perth Station / Citiplace 寄存','放下行李后开始 Perth Citywalk。','🧳'],
+  ['下午～晚间','Perth Citywalk','London Court / St Georges Terrace → Elizabeth Quay → Kings Park → CBD 晚饭。','🌆'],
+  ['约20:30','取行李 → 机场','不拖到 locker 最晚时间；前往机场准备10/11 00:25航班。','✈️']
  ]
 },
 {
  date:'10/11', dow:'周日', city:'Perth → 胡志明 → 上海',
  summary:'回程航班 + 上海接机',
  route:['Perth Airport Terminal 1','Tan Son Nhat International Airport T2','Shanghai Pudong International Airport T1'],
+ showMap:false,
+ navigation:{label:'📍 导航至出发机场 · Perth Airport T1',href:DTo('Perth Airport Terminal 1')},
  events:[
-  ['00:25','VN790 珀斯 T1 → 胡志明 T2','05:55 抵达。'],
-  ['07:20','VN524 胡志明 T2 → 上海浦东 T1','12:40 抵达。'],
-  ['13:30','预约接机','家庭下车地点从公开版隐藏。']
+  ['00:25','VN790 珀斯 T1 → 胡志明 T2','05:55 抵达。','✈️'],
+  ['07:20','VN524 胡志明 T2 → 上海浦东 T1','12:40 抵达。','✈️'],
+  ['13:30','预约接机','家庭下车地点从公开版隐藏。','🚗']
  ]
 }
 ];
@@ -959,12 +966,11 @@ function makeMiniRoute(points, idx, alternatives=[], date){
         </svg>`;
   return `<div class="route-map-card map-zoom" data-map-title="当日路线地图">${svg}<span class="zoom-chip">🔍 点开放大</span></div>`;
 }
-const driveNotes={"10/02":"🚗 Perth → Jurien Bay · 约260 km / 约3.5h；经 Lancelin、Pinnacles，避免夜间赶路。","10/03":"🚗 Jurien Bay → Kalbarri · 约390 km / 约4.5h；主线经 Hutt Lagoon，Lesueur 与 Geraldton 补给均按需打开备选导航。","10/05":"🚗 Kalbarri → Monkey Mia · 约390 km / 约4.5h；出发前加满油。","10/07":"🚗 Monkey Mia → Geraldton · 约390 km / 约4.5h；途中休息、及时补油。","10/08":"🚗 Geraldton → Fremantle · 约450 km / 约5.5h；已确定 Fremantle 异店还车，不为还车赶路。"};
+const driveNotes={"10/02":"🚗 Perth → Jurien Bay · 约260 km / 约3.5h；经 Lancelin、Pinnacles，避免夜间赶路。","10/03":"🚗 Jurien Bay → Kalbarri · 约390 km / 约4.5h；主线经 Hutt Lagoon，Lesueur 与 Geraldton 补给均按需取舍。","10/05":"🚗 Kalbarri → Monkey Mia · 约390 km / 约4.5h；出发前加满油。","10/07":"🚗 Monkey Mia → Geraldton · 约390 km / 约4.5h；途中休息、及时补油。","10/08":"🚗 Geraldton → Fremantle · 约450 km / 约5.5h；已确定 Fremantle 异店还车，不为还车赶路。"};
 const dayContainer=document.getElementById('dayContainer');
 days.forEach((d,idx)=>{
   const routeUrl=D(d.route[0],d.route[d.route.length-1],d.route.slice(1,-1));
   const alternatives=d.alternatives||[];
-  const alternativeHtml=alternatives.length?`<div class="route-options"><b>备选路线 · 不计入默认导航</b><div class="actions">${alternatives.map(a=>`<a class="btn small" target="_blank" rel="noopener" href="${D(a.points[0],a.points[a.points.length-1],a.points.slice(1,-1))}">${a.label}</a>`).join('')}</div></div>`:'';
   const evHtml=d.events.map(e=>{
     let body=e[1];
     // Names/addresses below are already present in V7.6's route or order details.
@@ -975,13 +981,27 @@ days.forEach((d,idx)=>{
       ['Lesueur Scenic Drive','Lesueur Scenic Drive Entry Cockleshell Gully Road'],['Hutt Lagoon','Hutt Lagoon Pink Lake Lookout Port Gregory'],['Geraldton','Coles Geraldton Chapman Road View Street'],['Kalbarri Palm Resort','Kalbarri Palm Resort 8 Porter Street'],['Kalbarri Skywalk','Kalbarri Skywalk Car Park'],['Nature’s Window','The Loop and Natures Window Car Park Kalbarri'],['Z Bend','Z Bend Lookout Car Park Kalbarri'],['Hamelin Pool','Hamelin Pool Telegraph Station'],['Shell Beach','Shell Beach Car Park Shark Bay'],['Eagle Bluff','Eagle Bluff Lookout Car Park'],['Ocean Park Aquarium','Ocean Park Aquarium Shark Bay'],['Denham','Denham WA'],['RAC Monkey Mia Dolphin Resort','RAC Monkey Mia Dolphin Resort'],['Little Lagoon','Little Lagoon WA'],
       ['Overlander Roadhouse','Overlander Roadhouse WA'],['The Gerald Apartment Hotel','The Gerald Apartment Hotel 25 Cathedral Avenue Geraldton'],['Eneabba','Eneabba WA'],['Warders Hotel','Warders Hotel by Garde Fremantle'],['Pedal & Flipper','Pedal and Flipper Rottnest Island Bedford Avenue'],['Gibney','Gibney 40 Marine Parade Cottesloe'],['Sardine Jetty','Sardine Jetty 1 Mews Road Fremantle'],['Whale Watch Perth','Whale Watch Perth Sardine Jetty Fremantle'],['Fremantle Station','Fremantle Station WA'],['Citiplace','Citiplace Rest Centre Perth'],['London Court','London Court Perth'],['Elizabeth Quay','Elizabeth Quay Perth'],['Kings Park','Kings Park and Botanic Garden Perth'],['Perth Station','Perth Station WA']
     ];
-    placeLinks.forEach(([label,query])=>{if(body.includes(label)){body=body.replace(label,`<a class="place" target="_blank" rel="noopener" href="${G(query)}">${label}</a>`);}});
+    const matchedPlaceLinks=placeLinks
+      .filter(([label])=>e[1].includes(label))
+      .filter(([label])=>!placeLinks.some(([other])=>other.length>label.length&&e[1].includes(other)&&other.includes(label)))
+      .sort((a,b)=>b[0].length-a[0].length);
+    matchedPlaceLinks.forEach(([label,query])=>{body=body.replace(label,`<a class="place" target="_blank" rel="noopener" href="${G(query)}">${label}</a>`);});
     let badges='';
     if(e[2].includes('已取消')) badges+='<span class="badge">已取消项目</span>';
     if(/开船前5分钟|08:30|不要为了17:30|夜间|日落后|最晚22:00/.test(e[2]+e[1])) badges+='<span class="badge risk">注意时间</span>';
     if(/Island Explorer|FamilyRider|购/.test(e[2]+e[1])) badges+='<span class="badge book">可能需现场/提前购票</span>';
-    return `<div class="event"><div class="ev-time">${e[0]}</div><div class="ev-body"><div class="ev-title">${body}</div><div class="ev-note">${e[2]}</div>${badges?`<div class="ev-badges">${badges}</div>`:''}</div></div>`;
+    return `<div class="event"><div class="ev-time">${e[0]}</div><div class="ev-body"><div class="ev-content"><span class="ev-icon" aria-hidden="true">${e[3]||'📍'}</span><div class="ev-copy"><div class="ev-title">${body}</div><div class="ev-note">${e[2]}</div>${badges?`<div class="ev-badges">${badges}</div>`:''}</div></div></div></div>`;
   }).join('');
+  const routePanel=d.showMap===false
+    ? `<div class="route-panel departure-nav-panel"><span class="departure-nav-label">回程日 · 出发机场导航</span><div class="actions"><a class="btn primary" target="_blank" rel="noopener" href="${d.navigation.href}">${d.navigation.label}</a><span class="btn small departure-nav-note">打开后以当前位置规划驾车路线</span></div></div>`
+    : `<div class="route-panel">
+      ${driveNotes[d.date]?`<div class="drive-strip"><b>驾驶提醒</b> · ${driveNotes[d.date]}</div>`:""}
+      ${makeMiniRoute(d.route,idx,alternatives,d.date)}
+      <div class="actions">
+        <a class="btn primary" target="_blank" rel="noopener" href="${routeUrl}">一键打开全天多点导航</a>
+        <span class="btn small">地图可点开放大 · 导航以 Google Maps 实时结果为准</span>
+      </div>
+    </div>`;
   const el=document.createElement('details');
   el.className='card day';
   el.innerHTML=`
@@ -990,15 +1010,7 @@ days.forEach((d,idx)=>{
       <div class="day-summary"><h3>${d.city}</h3></div>
       <span class="day-toggle-label" aria-hidden="true"></span>
     </summary>
-    <div class="route-panel">
-      ${driveNotes[d.date]?`<div class="drive-strip"><b>驾驶提醒</b> · ${driveNotes[d.date]}</div>`:""}
-      ${makeMiniRoute(d.route,idx,alternatives,d.date)}
-      ${alternativeHtml}
-      <div class="actions">
-        <a class="btn primary" target="_blank" rel="noopener" href="${routeUrl}">一键打开全天多点导航</a>
-        <span class="btn small">地图可点开放大 · 导航以 Google Maps 实时结果为准</span>
-      </div>
-    </div>
+    ${routePanel}
     <div class="timeline">${evHtml}</div>`;
   dayContainer.appendChild(el);
 });
@@ -1074,17 +1086,6 @@ function updateOrderStates(){
   }
   if(next){
     const b=next.el.querySelector('.order-state'); if(b){b.classList.add('next');b.textContent='NEXT';}
-  }
-  const pick=current||next;
-  const title=document.getElementById('walletNextTitle'), meta=document.getElementById('walletNextMeta');
-  const tag=document.querySelector('#walletNext .tag');
-  if(pick){
-    title.textContent=pick.name;
-    const start=new Date(pick.start);
-    meta.textContent=(current?'正在使用 / 进行中 · ':'下一项 · ')+new Intl.DateTimeFormat('zh-CN',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Asia/Shanghai'}).format(start);
-    tag.textContent=current?'CURRENT ORDER':'NEXT ORDER';
-  }else{
-    title.textContent='本次行程订单已全部结束'; meta.textContent=''; tag.textContent='ORDER WALLET';
   }
 }
 updateOrderStates(); setInterval(updateOrderStates,60000);
