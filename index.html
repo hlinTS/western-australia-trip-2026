@@ -224,6 +224,16 @@ kbd{font-family:inherit;background:var(--chip);border:1px solid var(--line);bord
 .detail-line{display:grid;grid-template-columns:74px 1fr;gap:8px;padding:5px 0;font-size:13px}
 .detail-line .k{color:var(--muted)}
 .detail-note{margin-top:7px;background:color-mix(in srgb,var(--warn) 9%,transparent);border-left:3px solid var(--warn);border-radius:8px;padding:8px 9px;font-size:12px}
+.actual-note{display:none;margin:0 15px 14px;padding:9px 10px;border-left:3px solid var(--accent);border-radius:9px;background:color-mix(in srgb,var(--accent) 7%,var(--card));font-size:12px;line-height:1.55}
+.day.open .actual-note,.day[open] .actual-note{display:block}
+.actual-note .actual-label{display:block;margin-bottom:2px;color:var(--accent);font-size:11px;font-weight:850;letter-spacing:.04em}
+.expense-summary{padding:14px 15px}
+.expense-grid{display:grid;grid-template-columns:1fr auto;gap:0 14px;margin-top:8px}
+.expense-row{display:contents}
+.expense-row span,.expense-row b{padding:7px 0;border-bottom:1px solid var(--line);font-size:13px}
+.expense-row b{text-align:right;font-variant-numeric:tabular-nums}
+.expense-total span,.expense-total b{border-bottom:0;padding-top:10px;font-weight:850}
+.expense-note{margin-top:9px;color:var(--muted);font-size:11px;line-height:1.5}
 .ticket-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
 .ticket-actions .btn{width:100%}
 .public-ticket-note{font-size:12px;color:var(--muted);padding:8px 0}
@@ -292,6 +302,7 @@ kbd{font-family:inherit;background:var(--chip);border:1px solid var(--line);bord
 <a href="#map">总览地图</a>
 <a href="#flights">航班</a>
 <a href="#confirmed">订单钱包</a>
+<a href="#expenses">费用</a>
 <a href="#days">逐日行程</a>
 <a href="#todo">待办</a>
 <a href="#packing">行李</a>
@@ -558,6 +569,20 @@ kbd{font-family:inherit;background:var(--chip);border:1px solid var(--line);bord
 
 
 </section>
+<section id="expenses">
+<div class="section-title"><h2>旅行费用总结</h2><small>人均 · 不含购物</small></div>
+<div class="card expense-summary">
+<div class="expense-grid">
+<div class="expense-row"><span>交通（含机票、租车、船票、接送机）</span><b>¥8,004.19</b></div>
+<div class="expense-row"><span>住宿</span><b>¥5,724.39</b></div>
+<div class="expense-row"><span>餐饮</span><b>¥4,689.27</b></div>
+<div class="expense-row"><span>娱乐（活动及门票）</span><b>¥716.75</b></div>
+<div class="expense-row"><span>其他杂费</span><b>¥558.22</b></div>
+<div class="expense-row expense-total"><span>人均合计（不含购物）</span><b>¥19,692.81</b></div>
+</div>
+<div class="expense-note">金额按实际支付记录整理，统一以人民币展示；分类金额相加因四舍五入与人均合计相差 0.01 元。</div>
+</div>
+</section>
 <section id="days">
 <div class="section-title"><h2>逐日行程</h2><div class="itinerary-note"><small>时间均为当地时区</small><small class="expand-hint">点按每日卡片展开详情</small></div></div>
 <div id="dayContainer"></div>
@@ -665,6 +690,7 @@ const days = [
 {
  date:'09/30', dow:'周三', city:'上海 → 胡志明',
  summary:'VN525 抵达 · 胡志明夜游',
+ actualNote:'原计划晚饭后可选 Sả Spa & Onsen；实际未去，之后改去 Pho Viet Nam 吃饭。',
  route:['上海浦东国际机场 T1','Tan Son Nhat International Airport T2','M City Hotel Saigon','Ho Thi Ky Food Street','Sa Spa & Onsen Ho Chi Minh City','M City Hotel Saigon'],
  events:[
   ['11:45','预约送机 → 浦东机场 T1','家庭上车地点已从公开版隐藏。','🚗'],
@@ -677,6 +703,7 @@ const days = [
 {
  date:'10/01', dow:'周四', city:'胡志明 → 珀斯',
  summary:'西贡半日 · 15:20 飞珀斯',
+ actualNote:'实际因天气太热没有逛景点，直接去了 The Cafe Apartment（咖啡公寓），之后又去喝了 The Workshop Coffee。',
  route:['M City Hotel Saigon','Independence Palace Ho Chi Minh City','Notre Dame Cathedral of Saigon','Saigon Central Post Office','The Cafe Apartment 42 Nguyen Hue','M City Hotel Saigon','Tan Son Nhat International Airport T2','Perth Airport T1','Metro Hotel Perth City'],
  events:[
   ['约08:00','西贡半日开始','从酒店出发，上午活动集中在 District 1。','🚶'],
@@ -692,6 +719,7 @@ const days = [
 {
  date:'10/02', dow:'周五', city:'Perth → Lancelin → Jurien Bay',
  summary:'北线自驾 Day 1',
+ actualNote:'考虑驾驶安全，实际在日落前抵达 Jurien Bay 民宿并办理入住。',
  route:['Metro Hotel Perth City','No Birds Car Rental, 160 Adelaide Terrace Perth','Corica Pastries Northbridge','Parkside Coffee Perth','Lancelin Sand Dunes Carpark Beacon Road','Endeavour Tavern Lancelin','Pinnacles Desert Discovery Centre','Jurien Bay Motel Apartments'],
  events:[
   ['上午','退房 · 取车 · 苹果派 · 咖啡','Metro Hotel 退房 → No Birds 取车 → Corica 买苹果派 → Parkside Coffee，完成后正式北上。','🚗'],
@@ -704,6 +732,7 @@ const days = [
 {
  date:'10/03', dow:'周六', city:'Jurien Bay → Hutt Lagoon → Kalbarri',
  summary:'Hutt Lagoon 主线 · Lesueur / Geraldton 均为备选',
+ actualNote:'原计划可选 Lesueur Scenic Drive；实际直接前往 Hutt Lagoon 粉湖，之后去 Kalbarri，途中顺路停留 Pot Alley 等几个途经点。',
  route:['Jurien Bay Motel Apartments','Hutt Lagoon Pink Lake Lookout Port Gregory','Kalbarri Palm Resort'],
  alternatives:[
   {label:'Lesueur Scenic Drive（时间充裕再去）',points:['Jurien Bay Motel Apartments','Lesueur Scenic Drive Entry Cockleshell Gully Road','Hutt Lagoon Pink Lake Lookout Port Gregory']},
@@ -719,6 +748,7 @@ const days = [
 {
  date:'10/04', dow:'周日', city:'Kalbarri',
  summary:'Kalbarri National Park 全天',
+ actualNote:'实际上午先去 Z Bend，完成 Lookout + River Trail 徒步；中午回小镇民宿午休，15:00 后再去 Skywalk 和 Nature’s Window。',
  route:['Kalbarri Palm Resort','Kalbarri Skywalk Car Park','The Loop and Nature’s Window Car Park','Z Bend Lookout Car Park','Kalbarri Palm Resort'],
  events:[
   ['①','Kalbarri Skywalk','停车后步行前往观景平台，以峡谷观景为主。','🌉'],
@@ -741,6 +771,7 @@ const days = [
 {
  date:'10/06', dow:'周二', city:'Monkey Mia / Shark Bay',
  summary:'海豚首选日 · 轻松度假',
+ actualNote:'原计划自由活动；实际没有外出，上午在酒店皮划艇，下午在酒店休息。',
  route:['RAC Monkey Mia Dolphin Resort','Little Lagoon WA','Denham WA','RAC Monkey Mia Dolphin Resort'],
  events:[
   ['','Monkey Mia 海豚 · 首选日','10/6、10/7 两个早晨都有机会；今天优先参加，按度假村当天官方安排到场。','🐬'],
@@ -762,6 +793,7 @@ const days = [
 {
  date:'10/08', dow:'周四', city:'Geraldton → Fremantle',
  summary:'南返 · Fremantle 异店还车',
+ actualNote:'原计划龙虾工厂为可选；实际10:00在杰拉尔顿吃早餐，约13:30到龙虾工厂用午餐。',
  route:['The Gerald Apartment Hotel','Eneabba WA','No Birds Car Hire Fremantle','Warders Hotel by Garde Fremantle'],
  events:[
   ['','途中加油 / 休息','出发时先看油量；途中选择合适的加油站补油并休息。Eneabba 可作为优先选择，但不必为了固定地点绕路。','⛽'],
@@ -773,6 +805,7 @@ const days = [
 {
  date:'10/09', dow:'周五', city:'Rottnest Island',
  summary:'10:00 去 · 17:30 回 · E-bike 环岛',
+ actualNote:'原计划17:30返程；实际乘坐16:30返程船，回酒店休息后再去晚餐。若前序船次有余位，可考虑当天提前乘坐。',
  route:['Warders Hotel by Garde Fremantle','B Shed Ferry Terminal Fremantle','Pedal & Flipper','Little Salmon Bay Rottnest Island','Wadjemup Lighthouse','West End Rottnest Island','Cathedral Rocks Rottnest Island','Geordie Bay Rottnest Island','Longreach Bay Rottnest Island','Pedal & Flipper','B Shed Ferry Terminal Fremantle'],
  events:[
   ['10:00','Fremantle → Rottnest','已预订船班；提前到码头候船。','⛴️'],
@@ -1011,7 +1044,8 @@ days.forEach((d,idx)=>{
       <span class="day-toggle-label" aria-hidden="true"></span>
     </summary>
     ${routePanel}
-    <div class="timeline">${evHtml}</div>`;
+    <div class="timeline">${evHtml}</div>
+    ${d.actualNote?`<div class="actual-note"><span class="actual-label">旅后记录</span>${d.actualNote}</div>`:''}`;
   dayContainer.appendChild(el);
 });
 
@@ -1019,15 +1053,11 @@ const todos=[
   ['vn-arrival-card','09/28','填写越南电子入境卡','提前72小时填写，完成后保存确认信息 / 截图。','2026-09-28T09:00:00+08:00'],
   ['visa-receive','等待寄回','收到越南另纸签后核对信息','核对姓名、护照信息、有效期，并离线保存。',''],
   ['rotto-weather-1','10/01','第一次检查 10/9 Rottnest 天气','重点看降雨、平均风速和阵风；决定是否利用 >7天免费取消 E-bike。','2026-10-01T09:00:00+08:00'],
-  ['review-mcity','10/02','评价 M City Hotel Saigon，领取返现','美团：退房后60天内可评价返现；安排在退房次日。','2026-10-02T09:00:00+08:00'],
   ['jurien-key-email','10/02 下午','检查 Jurien Bay 自助入住邮件','确认收到密码 / 取钥匙说明；未收到则联系酒店。','2026-10-02T15:00:00+08:00'],
   ['rotto-weather-2','10/06','再次检查 10/9 Rottnest 天气','最终决定保留 E-bike，还是取消后改 Island Explorer。','2026-10-06T09:00:00+08:00'],
   ['fuel-return','10/08','还车前补足油量并完成留证','拍油表、里程、车身四周、停车位置、锁车状态和 key-drop（如适用）。','2026-10-08T12:00:00+08:00'],
-  ['review-monkey','10/08','评价 RAC Monkey Mia，领取返现','去哪儿：退房后72小时内；安排在退房次日。','2026-10-08T09:00:00+08:00'],
-  ['review-gerald','10/09','评价 The Gerald，领取返现','去哪儿：退房后72小时内；安排在退房次日。','2026-10-09T09:00:00+08:00'],
   ['familyrider','10/09','确认 10/10 FamilyRider / 公交购票方式','Fremantle → Perth → Airport，两人按当天实际票价选择。','2026-10-09T12:00:00+08:00'],
   ['whale-check','10/09 晚','确认 WWWA 次日海况 / 运营通知','10/10 08:30 前到 Sardine Jetty。','2026-10-09T20:00:00+08:00'],
-  ['review-warders','10/11','评价 Warders Hotel，领取返现','去哪儿：退房后72小时内；安排在退房次日。','2026-10-11T13:00:00+08:00']
 ];
 const todoList=document.getElementById('todoList');
 const KEY='wa-trip-2026-todos'; const CUSTOM_KEY='wa-trip-2026-custom-todos';
@@ -1053,7 +1083,7 @@ function updatePriority(){
  const now=Date.now();
  const candidates=allTodos().filter(x=>x[4]&&!saved[x[0]]&&new Date(x[4]).getTime()>=now).sort((a,b)=>new Date(a[4])-new Date(b[4]));
  if(candidates.length){title.textContent=candidates[0][2]; meta.textContent=(candidates[0][1]+' · '+(candidates[0][3]||'')).trim(); return;}
- const p=allTodos().find(x=>!saved[x[0]]); if(p){title.textContent=p[2];meta.textContent=p[3]||p[1];} else {title.textContent='近期关键待办已完成';meta.textContent='继续按下一项已确认行程推进。';}
+ const p=allTodos().find(x=>!saved[x[0]]); if(p){title.textContent=p[2];meta.textContent=p[3]||p[1];} else {title.textContent='暂无待办事项';meta.textContent='行程已结束，待办清单仍保留供查看。';}
 }
 updatePriority();
 
